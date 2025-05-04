@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEXT TO IMAGE DEVELOPED BY RAMZAN AHSAN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .glow {
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+            animation: glow-animation 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow-animation {
+            from {
+                text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ffffff;
+            }
+            to {
+                text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+            }
+        }
+        .glow-box {
+            box-shadow: 0 0 20px #9d4dff, 0 0 30px rgba(157, 77, 255, 0.5);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        .neon-border {
+            border: 2px solid #9d4dff;
+            box-shadow: inset 0 0 10px #9d4dff, 0 0 10px #9d4dff;
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(157, 77, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(157, 77, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(157, 77, 255, 0);
+            }
+        }
+        .social-btn {
+            transition: all 0.3s ease;
+        }
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(157, 77, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white glow">
+                TEXT TO IMAGE DEVELOPED BY RAMZAN AHSAN
+            </h1>
+        </header>
+
+        <!-- Main Content -->
+        <main class="max-w-4xl mx-auto">
+            <!-- Search Box -->
+            <div class="bg-gray-900 bg-opacity-50 rounded-xl p-6 mb-8 neon-border">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <input 
+                        type="text" 
+                        id="promptInput" 
+                        placeholder="Describe your futuristic scene (e.g. a futuristic city at night, cyberpunk style)" 
+                        class="flex-grow px-4 py-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    >
+                    <button 
+                        id="generateBtn" 
+                        class="px-6 py-3 bg-purple-600 hover:bg-purple-500 rounded-lg font-semibold transition-all duration-300 pulse"
+                    >
+                        <i class="fas fa-robot mr-2"></i> Generate
+                    </button>
+                </div>
+                
+                <!-- Download Button -->
+                <div class="mt-6 flex justify-center">
+                    <button 
+                        id="downloadBtn" 
+                        class="px-6 py-2 bg-purple-600 hover:bg-purple-500 rounded-lg font-medium hidden transition-all duration-300"
+                    >
+                        <i class="fas fa-download mr-2"></i> Download Image
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result Display -->
+            <div class="text-center mb-12">
+                <div id="loadingSpinner" class="hidden">
+                    <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-400 mb-4"></div>
+                    <p class="text-gray-300">Generating your cyberpunk masterpiece...</p>
+                </div>
+                <div id="imageContainer" class="hidden">
+                    <img id="generatedImage" class="mx-auto rounded-xl max-w-full h-auto glow-box" alt="Generated AI Image">
+                </div>
+                <div id="errorMessage" class="hidden text-red-400 bg-gray-900 bg-opacity-50 p-4 rounded-lg">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    <span>Failed to generate image. Please try again.</span>
+                </div>
+            </div>
+
+            <!-- Social Buttons -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+                <a href="https://t.me/Tips0Courses" target="_blank" class="social-btn bg-blue-600 hover:bg-blue-500 rounded-lg p-4 text-center">
+                    <i class="fab fa-telegram text-2xl mb-2"></i>
+                    <p>Telegram Channel</p>
+                </a>
+                <a href="https://chat.whatsapp.com/LoafyPWMGOv88oElxdwOB8" target="_blank" class="social-btn bg-green-600 hover:bg-green-500 rounded-lg p-4 text-center">
+                    <i class="fab fa-whatsapp text-2xl mb-2"></i>
+                    <p>WhatsApp Group</p>
+                </a>
+                <a href="https://whatsapp.com/channel/0029Vb5j7KKBVJl1T9RTk80p" target="_blank" class="social-btn bg-green-700 hover:bg-green-600 rounded-lg p-4 text-center">
+                    <i class="fab fa-whatsapp text-2xl mb-2"></i>
+                    <p>WhatsApp Channel</p>
+                </a>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-400 mt-12">
+            <p class="mb-2">RAMZAN AHSAN</p>
+            <p class="text-sm">© 2023 CyberPunk AI Generator. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generateBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const promptInput = document.getElementById('promptInput');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const imageContainer = document.getElementById('imageContainer');
+            const generatedImage = document.getElementById('generatedImage');
+            const errorMessage = document.getElementById('errorMessage');
+
+            generateBtn.addEventListener('click', generateImage);
+            downloadBtn.addEventListener('click', downloadImage);
+
+            // Generate image from prompt
+            async function generateImage() {
+                const prompt = promptInput.value.trim();
+                
+                if (!prompt) {
+                    alert('Please enter a description for your image');
+                    return;
+                }
+
+                // Show loading spinner
+                loadingSpinner.classList.remove('hidden');
+                imageContainer.classList.add('hidden');
+                errorMessage.classList.add('hidden');
+                downloadBtn.classList.add('hidden');
+
+                try {
+                    // Encode the prompt for URL
+                    const encodedPrompt = encodeURIComponent(prompt);
+                    const apiUrl = `https://pollinations.ai/p/${encodedPrompt}`;
+                    
+                    // Set the image source
+                    generatedImage.src = apiUrl;
+                    
+                    // Wait for image to load
+                    generatedImage.onload = function() {
+                        loadingSpinner.classList.add('hidden');
+                        imageContainer.classList.remove('hidden');
+                        downloadBtn.classList.remove('hidden');
+                    };
+                    
+                    generatedImage.onerror = function() {
+                        loadingSpinner.classList.add('hidden');
+                        errorMessage.classList.remove('hidden');
+                    };
+                    
+                } catch (error) {
+                    console.error('Error generating image:', error);
+                    loadingSpinner.classList.add('hidden');
+                    errorMessage.classList.remove('hidden');
+                }
+            }
+
+            // Download the generated image
+            function downloadImage() {
+                if (!generatedImage.src) return;
+                
+                const link = document.createElement('a');
+                link.href = generatedImage.src;
+                link.download = `cyberpunk-ai-${Date.now()}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            // Add animation to generate button on hover
+            generateBtn.addEventListener('mouseenter', function() {
+                this.classList.add('animate-pulse');
+            });
+            
+            generateBtn.addEventListener('mouseleave', function() {
+                this.classList.remove('animate-pulse');
+            });
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=Ali4035/image" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
